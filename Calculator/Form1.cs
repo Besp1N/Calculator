@@ -17,63 +17,109 @@ namespace Calculator
         {
             InitializeComponent();
             lblPrinter.Text = string.Empty;
-            
+
+        }
+        string FirstValue;
+        string SecondValue;
+        char sign = ' ';
+
+        private void btn7_Click(object sender, EventArgs e)
+        {
+            Formula(7);
         }
 
-        int FirstValue;
-        int SecondValue;
-        int plus;
-        int minus;
-
-        private void BtnNumberClick(object sender, EventArgs e)
+        private void btn1_Click(object sender, EventArgs e)
         {
-            var button = sender as Button;
-            lblPrinter.Text += button.Text;
-            FirstValue = int.Parse(lblPrinter.Text);            
+            Formula(1);
         }
 
-        private void BtnOperationClick(object sender, EventArgs e)
+        private void btn2_Click(object sender, EventArgs e)
         {
-            var operation = sender as Button;
+            Formula(2);
+        }
+
+        private void btn3_Click(object sender, EventArgs e)
+        {
+            Formula(3);
+        }
+
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+            sign = '+';
             lblPrinter.Text = string.Empty;
-
-           
-            SecondValue = int.Parse(lblPrinter.Text);
-
-            if (operation.Text == "+")
-            {
-                plus = FirstValue + SecondValue;
-            }
-          
-
         }
 
-        private void BtnClick()
+        private void btnMinus_Click(object sender, EventArgs e)
         {
-            Button[] buttons = new Button[10];
-            buttons[0] = btn1;
-            buttons[1] = btn2;
-            buttons[2] = btn3;
-            buttons[3] = btn4;
-            buttons[4] = btn5;
-            buttons[5] = btn6;
-            buttons[6] = btn7;
-            buttons[7] = btn8;
-            buttons[8] = btn9;
-            buttons[9] = btn0;
+            sign = '-';
+            lblPrinter.Text = string.Empty;
+        }
 
-          
-          
+        private void btn6_Click(object sender, EventArgs e)
+        {
+            Formula(6);
+        }
+
+        private void btn5_Click(object sender, EventArgs e)
+        {
+            Formula(5);
+        }
+
+        private void btn4_Click(object sender, EventArgs e)
+        {
+            Formula(4);
+        }
+
+        private void btn8_Click(object sender, EventArgs e)
+        {
+            Formula(8);
+        }
+
+        private void btn9_Click(object sender, EventArgs e)
+        {
+            Formula(9);
         }
 
         private void btnEquals_Click(object sender, EventArgs e)
         {
-            var equals = sender as Button;
+            switch (sign)
+            {
+                case('+'):
+                    lblPrinter.Text = (int.Parse(FirstValue) + int.Parse(SecondValue)).ToString();
+                    break;
 
-         
+                case ('-'):
+                    lblPrinter.Text = (int.Parse(FirstValue) - int.Parse(SecondValue)).ToString();
+                    break;
+            }
+        }
 
-            equals.Text = plus.ToString();
+        private void lblReset_Click(object sender, EventArgs e)
+        {
+            FirstValue = string.Empty;
+            SecondValue = string.Empty;
+            sign = ' ';
+            lblPrinter.Text = string.Empty;
+        }
 
+        private void btn0_Click(object sender, EventArgs e)
+        {
+            Formula(0);
+        }
+
+        private void Formula(int number)
+        {
+            if (sign == ' ')
+            {
+                FirstValue += number;
+                lblPrinter.Text = FirstValue;
+            }
+            else
+            {
+                SecondValue += number;
+                lblPrinter.Text = SecondValue;
+            }
+           
         }
     }
 }
